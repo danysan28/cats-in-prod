@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 4000
 
 # 7️⃣ Start the application
-CMD ["node", "src/index.js"]
+CMD ["node", "src/does-not-exist.js"]
