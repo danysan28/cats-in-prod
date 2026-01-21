@@ -1,0 +1,17 @@
+# Node
+node_modules
+npm-debug.log
+
+# Env
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# Docker
+*.log
+
+# Next.js
+.next
+out
