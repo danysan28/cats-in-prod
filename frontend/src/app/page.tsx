@@ -4,7 +4,7 @@ type Cat = {
 };
 
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cats`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/cats`, {
     cache: "no-store",
   });
   if (!res.ok) {
