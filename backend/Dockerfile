@@ -1,5 +1,5 @@
 # 1️⃣ Base image (Node LTS)
-FROM node:18-alpine
+FROM node:20-alpine
 
 # 2️⃣ Set working directory inside the container
 WORKDIR /app
@@ -8,13 +8,19 @@ WORKDIR /app
 COPY package*.json ./
 
 # 4️⃣ Install dependencies
-RUN npm install --production
+RUN npm install
 
 # 5️⃣ Copy the rest of the application code to the working directory
 COPY . .
 
-# 6️⃣ Expose the port the app runs on
+# 6️⃣ Prisma generate (if using Prisma)
+RUN npx prisma generate
+
+# 7️⃣ Build the TypeScript code
+RUN npm run build
+
+# 8️⃣ Expose the port the app runs on
 EXPOSE 4000
 
-# 7️⃣ Start the application
-CMD ["node", "src/index.js"]
+#  Start the application
+CMD ["node", "dist/server.js"]
