@@ -1,1 +1,1 @@
-import "./cats.paths";
+import "./cats";

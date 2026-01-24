@@ -1,5 +1,5 @@
-import { registry } from "../registry";
-import { createCatSchema } from "../../schemas/cats.schema";
+import { registry } from "../../registry";
+import { createCatSchema } from "../../../schemas/cats.schema";
 
 registry.register("CreateCatInput", createCatSchema);
 
