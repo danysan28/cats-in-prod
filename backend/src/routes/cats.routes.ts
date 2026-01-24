@@ -1,16 +1,21 @@
-import { Router, Request, Response } from "express";
-import { prisma } from "../lib/client";
+import { Router } from "express";
+import { CatsController } from "../controllers/cats.controller";
+import { CatsService } from "../services/cats.service";
+import { CatsRepository } from "../repositories/cats.repository";
+import { validate } from "../middleware/validate.middleware";
+import { createCatSchema } from "../schemas/cats.schema";
+
 const router = Router();
 
-// GET /cats - Retrieve all cats
-router.get("/", async (_req: Request, res: Response) => {
-  try {
-    const cats = await prisma.cat.findMany({ orderBy: { createdAt: "desc" } });
+const catsRepository = new CatsRepository();
+const catsService = new CatsService(catsRepository);
+const catsController = new CatsController(catsService);
 
-    res.json(cats);
-  } catch (error) {
-    res.status(500).json({ error: "Error fetching cats" });
-  }
-});
+router.get("/", catsController.getAllCats.bind(catsController));
+router.post(
+  "/",
+  validate(createCatSchema),
+  catsController.createCat.bind(catsController),
+);
 
 export default router;
